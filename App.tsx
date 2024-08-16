@@ -1,28 +1,46 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { AppLayout, Button, Input, ResultLabel, UsersList } from '@/components';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>
-        React Native Github Repositories Explorer
-      </Text>
+    <AppLayout>
+      <Input placeholder="Enter username" />
 
-      <Text>Empty Project</Text>
-    </View>
+      <Button label="Search" onPress={() => {}} />
+
+      <ResultLabel>
+        {'Showing users for "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'}
+      </ResultLabel>
+
+      <UsersList
+        users={[
+          {
+            login: 'aaa1',
+          },
+          {
+            login: 'aaa2',
+          },
+          {
+            login: 'aaa3',
+          },
+        ]}
+        userRepositories={[
+          {
+            name: 'RepoName',
+            description: 'description',
+            stargazers_count: 10,
+          },
+          {
+            name: 'RepoName',
+            description: null,
+            stargazers_count: 10,
+          },
+          {
+            name: 'RepoName',
+            description: 'description',
+            stargazers_count: 10,
+          },
+        ]}
+      />
+    </AppLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
