@@ -1,14 +1,15 @@
 import React from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { ActivityIndicator, Text, TouchableHighlight } from 'react-native';
 import { buttonStyles } from '@/components/Button/Button.styles';
 import { colors } from '@/constants';
 
 interface IButton {
   label: string;
+  isLoading: boolean;
   onPress: () => void;
 }
 
-export const Button = ({ label, onPress }: IButton) => {
+export const Button = ({ label, isLoading, onPress }: IButton) => {
   return (
     <TouchableHighlight
       style={buttonStyles.button}
@@ -16,7 +17,11 @@ export const Button = ({ label, onPress }: IButton) => {
       underlayColor={colors.activeGreen}
       onPress={onPress}
     >
-      <Text style={buttonStyles.label}>{label}</Text>
+      {isLoading ? (
+        <ActivityIndicator color={colors.white} />
+      ) : (
+        <Text style={buttonStyles.label}>{label}</Text>
+      )}
     </TouchableHighlight>
   );
 };

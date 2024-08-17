@@ -3,15 +3,15 @@ import { Text, View } from 'react-native';
 import { resultLabelStyles } from './ResultLabel.styles';
 
 interface IResultLabel {
-  children: string;
+  resultLabel: string;
 }
 
-export const ResultLabel = ({ children }: IResultLabel) => {
+export const ResultLabel = ({ resultLabel }: IResultLabel) => {
   return (
     <View style={resultLabelStyles.resultLabel}>
       <View style={resultLabelStyles.divider}>
         <Text numberOfLines={1} style={resultLabelStyles.text}>
-          {children}
+          {resultLabel}
         </Text>
       </View>
     </View>

@@ -34,4 +34,18 @@ export const userListItemStyles = StyleSheet.create({
       },
     ],
   },
+  isLoadingRepositories: {
+    padding: 18,
+    alignItems: 'center',
+  },
+  noRepositoriesFound: {
+    paddingTop: 8,
+    paddingBottom: 32,
+    paddingLeft: 24,
+  },
+  fetchError: {
+    paddingTop: 8,
+    paddingBottom: 32,
+    paddingLeft: 24,
+  },
 });

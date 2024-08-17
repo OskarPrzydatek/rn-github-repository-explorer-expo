@@ -1,6 +1,4 @@
-import { octokit } from '@/api/config';
-
-const USERS_PER_PAGE = 5;
+import axios from 'axios';
 
 /**
  *
@@ -15,11 +13,21 @@ const USERS_PER_PAGE = 5;
  * @documentation - https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-users
  *
  */
-export const getUsersByQuery = async (q: string) =>
-  await octokit.request('GET /search/users', {
-    q,
-    per_page: USERS_PER_PAGE,
-    headers: {
-      'X-GitHub-Api-Version': '2022-11-28',
+export const getUsersByQuery = async (q: string) => {
+  const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL;
+  const AUTH_TOKEN = process.env.EXPO_PUBLIC_AUTH_TOKEN;
+  const USERS_PER_PAGE = process.env.EXPO_PUBLIC_USERS_PER_PAGE;
+
+  const response = await axios.get(
+    `${BASE_URL}/search/users?q=${q}&per_page=${USERS_PER_PAGE}`,
+    {
+      headers: {
+        Accept: 'application/vnd.github+json',
+        Authorization: `Bearer ${AUTH_TOKEN}`,
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
     },
-  });
+  );
+
+  return response.data || [];
+};

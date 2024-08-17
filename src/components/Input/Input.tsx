@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
-import { TextInput } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { inputStyles } from '@/components/Input/Input.styles';
 import { colors } from '@/constants';
 
 interface IInput {
+  value: string;
   placeholder: string;
+  isValidationError: boolean;
+  isValidationErrorMessage: string;
+  onChangeText: (text: string) => void;
+  onSubmitEditing: () => void;
 }
 
-export const Input = ({ placeholder }: IInput) => {
+export const Input = ({
+  value,
+  placeholder,
+  isValidationError,
+  isValidationErrorMessage,
+  onChangeText,
+  onSubmitEditing,
+}: IInput) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const isFocusedStyle = isFocused
@@ -18,12 +30,21 @@ export const Input = ({ placeholder }: IInput) => {
   const onBlur = () => setIsFocused(false);
 
   return (
-    <TextInput
-      style={[inputStyles.input, isFocusedStyle]}
-      selectionColor={colors.black}
-      placeholder={placeholder}
-      onFocus={onFocus}
-      onBlur={onBlur}
-    />
+    <View style={inputStyles.input}>
+      <TextInput
+        value={value}
+        style={[inputStyles.textInput, isFocusedStyle]}
+        selectionColor={colors.black}
+        placeholder={placeholder}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChangeText={onChangeText}
+        onSubmitEditing={onSubmitEditing}
+      />
+
+      {isValidationError && (
+        <Text style={inputStyles.errorMessage}>{isValidationErrorMessage}</Text>
+      )}
+    </View>
   );
 };

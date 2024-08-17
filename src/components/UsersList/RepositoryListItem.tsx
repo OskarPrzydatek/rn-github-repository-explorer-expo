@@ -25,7 +25,9 @@ export const RepositoryListItem = ({
       style={[repositoryListItemStyles.repositoryListItem, isItemDividerStyles]}
     >
       <View style={repositoryListItemStyles.row}>
-        <Text>{name}</Text>
+        <Text numberOfLines={1} style={repositoryListItemStyles.name}>
+          {name}
+        </Text>
 
         <View style={repositoryListItemStyles.stargazersCounter}>
           <Text>{stargazersCount}</Text>
@@ -37,7 +39,9 @@ export const RepositoryListItem = ({
         </View>
       </View>
 
-      {!!description && <Text>{description}</Text>}
+      <Text numberOfLines={3} style={repositoryListItemStyles.description}>
+        {description ?? 'No repository description'}
+      </Text>
     </View>
   );
 };

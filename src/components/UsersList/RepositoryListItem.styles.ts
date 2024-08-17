@@ -13,6 +13,9 @@ export const repositoryListItemStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  name: {
+    width: '80%',
+  },
   stargazersCounter: {
     flexDirection: 'row',
     gap: 12,
@@ -25,5 +28,8 @@ export const repositoryListItemStyles = StyleSheet.create({
   divider: {
     borderBottomWidth: 1,
     borderBottomColor: colors.darkGrey,
+  },
+  description: {
+    width: '85%',
   },
 });

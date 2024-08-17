@@ -1,27 +1,56 @@
 import { IRepository } from '@/api/models';
-import React, { useState } from 'react';
-import { FlatList, ListRenderItem, Pressable, Text, View } from 'react-native';
-import { CollapseView } from '@/components/UsersList/CollapseView';
+import React from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItem,
+  Pressable,
+  Text,
+  View,
+} from 'react-native';
 import { RepositoryListItem } from '@/components/UsersList/RepositoryListItem';
 import { userListItemStyles } from '@/components/UsersList/UsersListItem.styles';
 import { Image } from 'expo-image';
+import { colors } from '@/constants';
 
 interface IUsersListItem {
   login: string;
-  userRepositories: IRepository[];
+  userRepositories: IRepository[] | undefined;
+  isUserRepositoriesListExpanded: boolean;
+  isLoadingRepositoriesByUserData: boolean;
+  fetchRepositoriesByUserError: Error | null;
+  onPressExpand: () => void;
 }
 
 const CHEVRON_ICON = require('../../../assets/svg/chevron.svg');
 
-export const UsersListItem = ({ login, userRepositories }: IUsersListItem) => {
-  const [expanded, setExpanded] = useState(false);
-
-  const expandStateButtonStyle = expanded
+export const UsersListItem = ({
+  isUserRepositoriesListExpanded,
+  login,
+  userRepositories,
+  isLoadingRepositoriesByUserData,
+  fetchRepositoriesByUserError,
+  onPressExpand,
+}: IUsersListItem) => {
+  const expandStateButtonStyle = isUserRepositoriesListExpanded
     ? userListItemStyles.collapseButtonOpen
     : userListItemStyles.collapseButtonClose;
-
   const expandStateChevronRotateStyle =
-    expanded && userListItemStyles.collapseButtonChevronOpen;
+    isUserRepositoriesListExpanded &&
+    userListItemStyles.collapseButtonChevronOpen;
+
+  const isExpandedWithLoading =
+    isUserRepositoriesListExpanded && isLoadingRepositoriesByUserData;
+  const isExpandedWithRepositories =
+    isUserRepositoriesListExpanded &&
+    userRepositories &&
+    userRepositories?.length > 0;
+  const isExpandedWithNoRepositories =
+    isUserRepositoriesListExpanded &&
+    userRepositories &&
+    userRepositories?.length === 0;
+  const isExpandedWithError =
+    isUserRepositoriesListExpanded && fetchRepositoriesByUserError;
 
   const renderItemForRepositoriesList: ListRenderItem<IRepository> = ({
     item,
@@ -38,9 +67,6 @@ export const UsersListItem = ({ login, userRepositories }: IUsersListItem) => {
       />
     );
   };
-
-  const onPressExpand = () =>
-    setExpanded((previousState: boolean) => !previousState);
 
   return (
     <View style={userListItemStyles.userListItem}>
@@ -59,13 +85,31 @@ export const UsersListItem = ({ login, userRepositories }: IUsersListItem) => {
         />
       </Pressable>
 
-      <CollapseView expanded={expanded}>
+      {isExpandedWithLoading && (
+        <View style={userListItemStyles.isLoadingRepositories}>
+          <ActivityIndicator color={colors.black} />
+        </View>
+      )}
+
+      {isExpandedWithRepositories && (
         <FlatList
           data={userRepositories}
           renderItem={renderItemForRepositoriesList}
           scrollEnabled={false}
         />
-      </CollapseView>
+      )}
+
+      {isExpandedWithNoRepositories && (
+        <View style={userListItemStyles.noRepositoriesFound}>
+          <Text>No repositories found</Text>
+        </View>
+      )}
+
+      {isExpandedWithError && (
+        <View style={userListItemStyles.fetchError}>
+          <Text>Oops! Somethiong went wrong :(</Text>
+        </View>
+      )}
     </View>
   );
 };

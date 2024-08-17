@@ -5,14 +5,40 @@ import { UsersListItem } from './UsersListItem';
 import { userListStyles } from './UserList.styles';
 
 interface IUsersList {
-  users: IUser[];
-  userRepositories: IRepository[];
+  users: IUser[] | undefined;
+  userRepositories: IRepository[] | undefined;
+  fetchRepositoriesByUserError: Error | null;
+  isLoadingRepositoriesByUserData: boolean;
+  userRepositoriesListExpanded: number | null;
+  onPressUserRepositoriesListExpand: (username: string, index: number) => void;
 }
 
-export const UsersList = ({ users, userRepositories }: IUsersList) => {
-  const renderItemForUsersList: ListRenderItem<IUser> = ({ item }) => (
-    <UsersListItem login={item.login} userRepositories={userRepositories} />
-  );
+export const UsersList = ({
+  users,
+  userRepositories,
+  isLoadingRepositoriesByUserData,
+  fetchRepositoriesByUserError,
+  userRepositoriesListExpanded,
+  onPressUserRepositoriesListExpand,
+}: IUsersList) => {
+  const renderItemForUsersList: ListRenderItem<IUser> = ({ item, index }) => {
+    const isUserRepositoriesListExpanded =
+      userRepositoriesListExpanded === index;
+
+    const handleOnPressUserRepositoriesListExpand = () =>
+      onPressUserRepositoriesListExpand(item.login, index);
+
+    return (
+      <UsersListItem
+        login={item.login}
+        userRepositories={userRepositories}
+        isUserRepositoriesListExpanded={isUserRepositoriesListExpanded}
+        isLoadingRepositoriesByUserData={isLoadingRepositoriesByUserData}
+        fetchRepositoriesByUserError={fetchRepositoriesByUserError}
+        onPressExpand={handleOnPressUserRepositoriesListExpand}
+      />
+    );
+  };
 
   return (
     <FlatList
