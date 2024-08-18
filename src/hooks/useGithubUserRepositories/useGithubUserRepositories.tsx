@@ -75,6 +75,7 @@ export const useGithubUserRepositories = () => {
 
   return {
     repositoriesByUsernameData,
+    fetchRepositoriesByUser,
     fetchRepositoriesByUserError,
     isLoadingRepositoriesByUserData,
     userRepositoriesListExpanded,

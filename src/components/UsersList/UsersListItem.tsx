@@ -22,6 +22,12 @@ interface IUsersListItem {
   isLoadingRepositoriesByUserData: boolean;
   fetchRepositoriesByUserError: Error | null;
   onPressExpand: () => void;
+
+  expandingPressableTestID?: string;
+  loadingViewTestID?: string;
+  repositoriesListTestID?: string;
+  noRepositoriesFoundViewTestID?: string;
+  errorViewTestID?: string;
 }
 
 const CHEVRON_ICON = require('../../../assets/svg/chevron.svg');
@@ -33,6 +39,12 @@ export const UsersListItem = ({
   isLoadingRepositoriesByUserData,
   fetchRepositoriesByUserError,
   onPressExpand,
+
+  expandingPressableTestID,
+  loadingViewTestID,
+  repositoriesListTestID,
+  noRepositoriesFoundViewTestID,
+  errorViewTestID,
 }: IUsersListItem) => {
   const expandStateButtonStyle = isUserRepositoriesListExpanded
     ? userListItemStyles.collapseButtonOpen
@@ -75,6 +87,7 @@ export const UsersListItem = ({
       <Pressable
         style={[userListItemStyles.collapseButton, expandStateButtonStyle]}
         onPress={onPressExpand}
+        testID={expandingPressableTestID}
       >
         <Text>{login}</Text>
 
@@ -88,7 +101,10 @@ export const UsersListItem = ({
       </Pressable>
 
       {isExpandedWithLoading && (
-        <View style={userListItemStyles.isLoadingRepositories}>
+        <View
+          style={userListItemStyles.isLoadingRepositories}
+          testID={loadingViewTestID}
+        >
           <ActivityIndicator color={colors.black} />
         </View>
       )}
@@ -98,17 +114,21 @@ export const UsersListItem = ({
           data={userRepositories}
           renderItem={renderItemForRepositoriesList}
           scrollEnabled={false}
+          testID={repositoriesListTestID}
         />
       )}
 
       {isExpandedWithNoRepositories && (
-        <View style={userListItemStyles.noRepositoriesFound}>
+        <View
+          style={userListItemStyles.noRepositoriesFound}
+          testID={noRepositoriesFoundViewTestID}
+        >
           <Text>No repositories found</Text>
         </View>
       )}
 
       {isExpandedWithError && (
-        <View style={userListItemStyles.fetchError}>
+        <View style={userListItemStyles.fetchError} testID={errorViewTestID}>
           <Text>Oops! Somethiong went wrong :(</Text>
         </View>
       )}

@@ -1,49 +1,67 @@
-// TODO: Add noew test for axios
-// import { getUsersByQuery } from './getUsersByQuery';
+import axios from 'axios';
 
-// // Mock octokit configuration
-// jest.mock('@/api/config', () => ({
-//   octokit: {
-//     request: jest.fn(),
-//   },
-// }));
+import { getUsersByQuery } from '@/api/getUsersByQuery/getUsersByQuery';
 
-// const mockQuery = 'mockQuery';
+jest.mock('axios');
 
-// describe('getUsersByQuery', () => {
-//   it('should get users by query', async () => {
-//     const mockResponse = {
-//       total_count: 1,
-//       incomplete_results: false,
-//       items: [
-//         {
-//           login: 'mockQueryUser',
-//           id: 1,
-//           type: 'User',
-//           site_admin: false,
-//           score: 1.0,
-//         },
-//       ],
-//     };
+const BASE_URL = 'https://api.github.com';
+const AUTH_TOKEN = 'fake-auth-token';
+const USERS_PER_PAGE = '5';
 
-//     (octokit.request as jest.Mock).mockResolvedValue(mockResponse);
-//     const result = await getUsersByQuery(mockQuery);
+const mockUsersData = {
+  items: [
+    { id: 1, login: 'johnDoe' },
+    { id: 2, login: 'johnSmith' },
+  ],
+};
 
-//     expect(octokit.request).toHaveBeenCalledWith('GET /search/users', {
-//       q: mockQuery,
-//       per_page: 5,
-//       headers: {
-//         'X-GitHub-Api-Version': '2022-11-28',
-//       },
-//     });
-//     expect(result).toEqual(mockResponse);
-//   });
+describe('getUsersByQuery', () => {
+  it('should return users data when API call is successful', async () => {
+    const mockQuery = 'john';
 
-//   it('should handle API errors for get users by qyery', async () => {
-//     (octokit.request as jest.Mock).mockRejectedValue(
-//       new Error('Request failed'),
-//     );
+    (axios.get as jest.Mock).mockResolvedValue({ data: mockUsersData });
 
-//     await expect(getUsersByQuery(mockQuery)).rejects.toThrow('Request failed');
-//   });
-// });
+    const result = await getUsersByQuery(mockQuery);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      `${BASE_URL}/search/users?q=${mockQuery}&per_page=${USERS_PER_PAGE}`,
+      {
+        headers: {
+          Accept: 'application/vnd.github+json',
+          Authorization: `Bearer ${AUTH_TOKEN}`,
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+      },
+    );
+    expect(result).toEqual(mockUsersData);
+  });
+
+  it('should return an empty array when API call returns no data', async () => {
+    const mockQuery = 'nonexistentuser';
+
+    (axios.get as jest.Mock).mockResolvedValue({ data: undefined });
+
+    const result = await getUsersByQuery(mockQuery);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      `${BASE_URL}/search/users?q=${mockQuery}&per_page=${USERS_PER_PAGE}`,
+      {
+        headers: {
+          Accept: 'application/vnd.github+json',
+          Authorization: `Bearer ${AUTH_TOKEN}`,
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+      },
+    );
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle API errors by throwing an exception', async () => {
+    const mockQuery = 'erroruser';
+
+    (axios.get as jest.Mock).mockRejectedValue(new Error('API Error'));
+
+    await expect(getUsersByQuery(mockQuery)).rejects.toThrow('API Error');
+  });
+});

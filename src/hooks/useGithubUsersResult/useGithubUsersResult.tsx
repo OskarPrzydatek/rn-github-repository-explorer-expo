@@ -57,7 +57,7 @@ export const useGithubUsersResult = () => {
     retry: 0,
   });
 
-  const isResultLabel = resultLabel && !isLoadingUsersByQueryData;
+  const isResultLabel = !!resultLabel && !isLoadingUsersByQueryData;
   const isUserListEnabled =
     !isFetchingUsersByQueryData || !isRefetchingFetchingUsersByQueryData;
   const isLoadingUsersListData =

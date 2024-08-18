@@ -3,7 +3,7 @@ import React from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 
 import { UsersListItem } from '@/components/UsersList/UsersListItem';
-import { userListStyles } from '@/components/UsersList/UserList.styles';
+import { userListStyles } from '@/components/UsersList/UsersList.styles';
 import { IRepository, IUser } from '@/api/models';
 
 interface IUsersList {
@@ -13,6 +13,9 @@ interface IUsersList {
   isLoadingRepositoriesByUserData: boolean;
   userRepositoriesListExpanded: number | null;
   onPressUserRepositoriesListExpand: (username: string, index: number) => void;
+
+  testID?: string;
+  usersListItemExpandingPressableTestID?: string;
 }
 
 export const UsersList = ({
@@ -22,6 +25,9 @@ export const UsersList = ({
   fetchRepositoriesByUserError,
   userRepositoriesListExpanded,
   onPressUserRepositoriesListExpand,
+
+  testID,
+  usersListItemExpandingPressableTestID,
 }: IUsersList) => {
   const renderItemForUsersList: ListRenderItem<IUser> = ({ item, index }) => {
     const isUserRepositoriesListExpanded =
@@ -38,6 +44,7 @@ export const UsersList = ({
         isLoadingRepositoriesByUserData={isLoadingRepositoriesByUserData}
         fetchRepositoriesByUserError={fetchRepositoriesByUserError}
         onPressExpand={handleOnPressUserRepositoriesListExpand}
+        expandingPressableTestID={`${index}-${usersListItemExpandingPressableTestID}`}
       />
     );
   };
@@ -48,6 +55,7 @@ export const UsersList = ({
       renderItem={renderItemForUsersList}
       contentContainerStyle={userListStyles.contentContainerStyle}
       showsVerticalScrollIndicator={false}
+      testID={testID}
     />
   );
 };

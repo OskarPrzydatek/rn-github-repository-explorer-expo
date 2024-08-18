@@ -40,7 +40,12 @@ export const AppScreen = () => {
         onPress={handleOnPressFetchUsersByQuery}
       />
 
-      {isResultLabel && <ResultLabel resultLabel={resultLabel} />}
+      {isResultLabel && (
+        <ResultLabel
+          resultLabel={resultLabel}
+          testID="app-screen-result-label"
+        />
+      )}
 
       {isUserListEnabled && (
         <UsersList
@@ -50,6 +55,7 @@ export const AppScreen = () => {
           isLoadingRepositoriesByUserData={isLoadingRepositoriesByUserData}
           userRepositoriesListExpanded={userRepositoriesListExpanded}
           onPressUserRepositoriesListExpand={onPressUserRepositoriesListExpand}
+          testID="app-screen-users-list"
         />
       )}
     </AppLayout>

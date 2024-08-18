@@ -13,8 +13,8 @@ import axios from 'axios';
  *
  */
 export const getRepositoriesByUser = async (username: string) => {
-  const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL;
-  const AUTH_TOKEN = process.env.EXPO_PUBLIC_AUTH_TOKEN;
+  const BASE_URL = process.env?.EXPO_PUBLIC_BASE_URL;
+  const AUTH_TOKEN = process.env?.EXPO_PUBLIC_AUTH_TOKEN;
 
   const response = await axios.get(`${BASE_URL}/users/${username}/repos`, {
     headers: {

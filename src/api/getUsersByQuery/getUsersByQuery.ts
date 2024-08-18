@@ -14,9 +14,9 @@ import axios from 'axios';
  *
  */
 export const getUsersByQuery = async (q: string) => {
-  const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL;
-  const AUTH_TOKEN = process.env.EXPO_PUBLIC_AUTH_TOKEN;
-  const USERS_PER_PAGE = process.env.EXPO_PUBLIC_USERS_PER_PAGE;
+  const BASE_URL = process.env?.EXPO_PUBLIC_BASE_URL;
+  const AUTH_TOKEN = process.env?.EXPO_PUBLIC_AUTH_TOKEN;
+  const USERS_PER_PAGE = process.env?.EXPO_PUBLIC_USERS_PER_PAGE;
 
   const response = await axios.get(
     `${BASE_URL}/search/users?q=${q}&per_page=${USERS_PER_PAGE}`,

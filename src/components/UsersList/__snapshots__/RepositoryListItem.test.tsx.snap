@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryListItem should match snapshot 1`] = `
+<View
+  style={
+    [
+      {
+        "gap": 8,
+        "paddingBottom": 32,
+        "paddingLeft": 24,
+        "paddingRight": 8,
+        "paddingTop": 8,
+      },
+      {
+        "borderBottomColor": "#d0d7de",
+        "borderBottomWidth": 1,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        {
+          "width": "80%",
+        }
+      }
+    />
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "gap": 12,
+        }
+      }
+    >
+      <Text>
+        0
+      </Text>
+      <Image
+        source={1}
+        style={
+          {
+            "height": 16,
+            "width": 16,
+          }
+        }
+      />
+    </View>
+  </View>
+  <Text
+    numberOfLines={3}
+    style={
+      {
+        "width": "85%",
+      }
+    }
+  >
+    No repository description
+  </Text>
+</View>
+`;

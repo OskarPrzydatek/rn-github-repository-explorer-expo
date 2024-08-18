@@ -12,6 +12,9 @@ interface IInput {
   isValidationErrorMessage: string;
   onChangeText: (text: string) => void;
   onSubmitEditing: () => void;
+
+  testID?: string;
+  validationMessageTestID?: string;
 }
 
 export const Input = ({
@@ -21,6 +24,9 @@ export const Input = ({
   isValidationErrorMessage,
   onChangeText,
   onSubmitEditing,
+
+  testID,
+  validationMessageTestID,
 }: IInput) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -42,10 +48,13 @@ export const Input = ({
         onBlur={onBlur}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
+        testID={testID}
       />
 
       {isValidationError && (
-        <Text style={inputStyles.errorMessage}>{isValidationErrorMessage}</Text>
+        <Text style={inputStyles.errorMessage} testID={validationMessageTestID}>
+          {isValidationErrorMessage}
+        </Text>
       )}
     </View>
   );

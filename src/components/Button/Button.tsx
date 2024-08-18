@@ -14,9 +14,19 @@ interface IButton {
   label: string;
   isLoading: boolean;
   onPress: () => void;
+
+  testID?: string;
+  activityIndicatorTestID?: string;
 }
 
-export const Button = ({ label, isLoading, onPress }: IButton) => {
+export const Button = ({
+  label,
+  isLoading,
+  onPress,
+
+  testID,
+  activityIndicatorTestID,
+}: IButton) => {
   const isIOSActivityIndicatorStyles =
     Platform.OS === 'ios' && buttonStyles.activityIndicator;
 
@@ -26,12 +36,14 @@ export const Button = ({ label, isLoading, onPress }: IButton) => {
       activeOpacity={0.7}
       underlayColor={colors.activeGreen}
       onPress={onPress}
+      testID={testID}
     >
       {isLoading ? (
         <ActivityIndicator
           color={colors.white}
           size={19.5} // Android only
           style={isIOSActivityIndicatorStyles}
+          testID={activityIndicatorTestID}
         />
       ) : (
         <Text style={buttonStyles.label}>{label}</Text>
