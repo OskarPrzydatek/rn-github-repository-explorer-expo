@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Text, View } from 'react-native';
-import { resultLabelStyles } from './ResultLabel.styles';
+
+import { resultLabelStyles } from '@/components/ResultLabel/ResultLabel.styles';
 
 interface IResultLabel {
   resultLabel: string;

@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { Text, View } from 'react-native';
-import { repositoryListItemStyles } from '@/components/UsersList/RepositoryListItem.styles';
 import { Image } from 'expo-image';
+
+import { repositoryListItemStyles } from '@/components/UsersList/RepositoryListItem.styles';
 
 interface IRepositoryListItem {
   name: string;

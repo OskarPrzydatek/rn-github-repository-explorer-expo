@@ -1,5 +1,6 @@
-import { AppScreen } from '@/screens';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { AppScreen } from '@/screens';
 
 const queryClient = new QueryClient();
 

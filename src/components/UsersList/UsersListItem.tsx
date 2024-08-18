@@ -1,5 +1,5 @@
-import { IRepository } from '@/api/models';
 import React from 'react';
+
 import {
   ActivityIndicator,
   FlatList,
@@ -8,9 +8,11 @@ import {
   Text,
   View,
 } from 'react-native';
+import { Image } from 'expo-image';
+
+import { IRepository } from '@/api/models';
 import { RepositoryListItem } from '@/components/UsersList/RepositoryListItem';
 import { userListItemStyles } from '@/components/UsersList/UsersListItem.styles';
-import { Image } from 'expo-image';
 import { colors } from '@/constants';
 
 interface IUsersListItem {

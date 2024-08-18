@@ -1,8 +1,10 @@
-import { IRepository, IUser } from '@/api/models';
 import React from 'react';
+
 import { FlatList, ListRenderItem } from 'react-native';
-import { UsersListItem } from './UsersListItem';
-import { userListStyles } from './UserList.styles';
+
+import { UsersListItem } from '@/components/UsersList/UsersListItem';
+import { userListStyles } from '@/components/UsersList/UserList.styles';
+import { IRepository, IUser } from '@/api/models';
 
 interface IUsersList {
   users: IUser[] | undefined;

@@ -1,8 +1,10 @@
-import { getUsersByQuery } from '@/api';
-import { IGetUsersByQueryResponse } from '@/api/models';
-import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
 import { Keyboard } from 'react-native';
+
+import { IGetUsersByQueryResponse } from '@/api/models';
+import { getUsersByQuery } from '@/api';
 
 /**
  *

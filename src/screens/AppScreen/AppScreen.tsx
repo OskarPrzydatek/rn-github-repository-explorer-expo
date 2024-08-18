@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { AppLayout, Button, Input, ResultLabel, UsersList } from '@/components';
 import { useGithubRepositoryExplorer } from '@/hooks';
-import React from 'react';
 
 export const AppScreen = () => {
   const {

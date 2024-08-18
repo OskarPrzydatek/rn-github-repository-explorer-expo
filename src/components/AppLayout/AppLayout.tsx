@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
-import { appLayoutStyles } from './AppLayout.styles';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { appLayoutStyles } from '@/components/AppLayout/AppLayout.styles';
 
 interface IAppLayout {
   children: ReactNode;

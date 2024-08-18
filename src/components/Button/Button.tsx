@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { ActivityIndicator, Text, TouchableHighlight } from 'react-native';
+
 import { buttonStyles } from '@/components/Button/Button.styles';
 import { colors } from '@/constants';
 

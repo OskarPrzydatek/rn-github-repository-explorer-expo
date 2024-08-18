@@ -5,5 +5,19 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'no-console': ['error'],
+    'import/order': [
+      'error',
+      {
+        'newlines-between': 'always',
+        pathGroups: [
+          {
+            pattern: 'react',
+            group: 'builtin',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['react'],
+      },
+    ],
   },
 };

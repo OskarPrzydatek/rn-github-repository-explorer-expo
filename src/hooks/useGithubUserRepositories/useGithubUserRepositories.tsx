@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
+
 import { getRepositoriesByUser } from '@/api';
 import { IRepository } from '@/api/models';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
 
 /**
  *
