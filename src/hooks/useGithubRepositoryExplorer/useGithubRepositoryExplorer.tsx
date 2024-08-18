@@ -14,7 +14,7 @@ import { useGithubUsersResult } from '@/hooks/useGithubUsersResult/useGithubUser
  * @property {string} resultLabel - The label indicating the current
  * state or result of the user search query.
  * @property {Array} usersByQueryData - The data of users returned by the search query.
- * @property {boolean} isLoadingUsersByQueryData - A flag indicating whether
+ * @property {boolean} isLoadingUsersListData - A flag indicating whether
  * the user search query is currently loading.
  * @property {boolean} isResultLabel - A flag indicating whether the result
  * label should be displayed.
@@ -46,7 +46,7 @@ export const useGithubRepositoryExplorer = () => {
     usernameValue,
     resultLabel,
     usersByQueryData,
-    isLoadingUsersByQueryData,
+    isLoadingUsersListData,
     isUserListEnabled,
     isResultLabel,
     isValidationError,
@@ -78,7 +78,7 @@ export const useGithubRepositoryExplorer = () => {
     usernameValue,
     resultLabel,
     usersByQueryData,
-    isLoadingUsersByQueryData,
+    isLoadingUsersListData,
     isUserListEnabled,
     isResultLabel,
     isValidationError,

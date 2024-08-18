@@ -8,7 +8,7 @@ export const AppScreen = () => {
     usernameValue,
     resultLabel,
     usersByQueryData,
-    isLoadingUsersByQueryData,
+    isLoadingUsersListData,
     isUserListEnabled,
     isResultLabel,
     isValidationError,
@@ -36,7 +36,7 @@ export const AppScreen = () => {
 
       <Button
         label="Search"
-        isLoading={isLoadingUsersByQueryData}
+        isLoading={isLoadingUsersListData}
         onPress={handleOnPressFetchUsersByQuery}
       />
 

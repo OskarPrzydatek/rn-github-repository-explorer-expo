@@ -10,6 +10,9 @@ export const buttonStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.green,
   },
+  activityIndicator: {
+    height: 17,
+  },
   label: {
     fontWeight: 'bold',
     color: colors.white,

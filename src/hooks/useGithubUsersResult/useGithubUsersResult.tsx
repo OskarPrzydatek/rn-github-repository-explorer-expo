@@ -60,6 +60,8 @@ export const useGithubUsersResult = () => {
   const isResultLabel = resultLabel && !isLoadingUsersByQueryData;
   const isUserListEnabled =
     !isFetchingUsersByQueryData || !isRefetchingFetchingUsersByQueryData;
+  const isLoadingUsersListData =
+    isLoadingUsersByQueryData || !isUserListEnabled;
   const isValidationError =
     fetchUsersByQueryError?.message === 'Request failed with status code 422';
 
@@ -93,12 +95,13 @@ export const useGithubUsersResult = () => {
       setResultLabel('Oops! Something went wrong  :(');
     }
 
-    if (isLoadingUsersByQueryData) {
+    if (isLoadingUsersListData) {
       setResultLabel(`Looking for users "${resultLabelUser}"`);
     }
   }, [
     fetchUsersByQueryError,
     isLoadingUsersByQueryData,
+    isLoadingUsersListData,
     isValidationError,
     resultLabelUser,
     usernameValue,
@@ -109,7 +112,7 @@ export const useGithubUsersResult = () => {
     usernameValue,
     resultLabel,
     usersByQueryData,
-    isLoadingUsersByQueryData,
+    isLoadingUsersListData,
     isUserListEnabled,
     isResultLabel,
     isValidationError,

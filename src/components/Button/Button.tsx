@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { ActivityIndicator, Text, TouchableHighlight } from 'react-native';
+import {
+  ActivityIndicator,
+  Platform,
+  Text,
+  TouchableHighlight,
+} from 'react-native';
 
 import { buttonStyles } from '@/components/Button/Button.styles';
 import { colors } from '@/constants';
@@ -12,6 +17,9 @@ interface IButton {
 }
 
 export const Button = ({ label, isLoading, onPress }: IButton) => {
+  const isIOSActivityIndicatorStyles =
+    Platform.OS === 'ios' && buttonStyles.activityIndicator;
+
   return (
     <TouchableHighlight
       style={buttonStyles.button}
@@ -20,7 +28,11 @@ export const Button = ({ label, isLoading, onPress }: IButton) => {
       onPress={onPress}
     >
       {isLoading ? (
-        <ActivityIndicator color={colors.white} />
+        <ActivityIndicator
+          color={colors.white}
+          size={19.5} // Android only
+          style={isIOSActivityIndicatorStyles}
+        />
       ) : (
         <Text style={buttonStyles.label}>{label}</Text>
       )}
